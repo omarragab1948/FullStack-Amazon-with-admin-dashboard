@@ -6,6 +6,7 @@ import { LiaStarSolid } from "react-icons/lia";
 import { VscTriangleDown } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../rtk//reducers/CartReducers";
+import Loading from "../../components/Loading/Loading";
 
 const ProductDetails = () => {
   const [data, setData] = useState([]);
@@ -42,9 +43,10 @@ const ProductDetails = () => {
     dispatch(addToCart(product));
   };
 
-  if (data.length === 0) {
-    return <div>Loading...</div>; // Or any loading indicator you prefer
+  if (!data.length) {
+    return <Loading />;
   }
+
   const renderAboutProperties = (aboutObject, limit) => {
     const propertiesToRender = showAllProperties
       ? Object.entries(aboutObject)
