@@ -5,7 +5,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
-import Bascket from "./pages/Bascket/Bascket";
+import Bascket from "./pages/Basket/Bascket";
 import Profile from "./pages/Profile/Profile";
 import RequireAuth from "./components/RequireAuth";
 

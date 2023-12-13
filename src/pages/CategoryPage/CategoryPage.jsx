@@ -4,6 +4,7 @@ import { FiSettings } from "react-icons/fi";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
+import Loading from "../../components/Loading/Loading";
 
 const CategoryPage = () => {
   const [data, setData] = useState([]);
@@ -102,6 +103,10 @@ const CategoryPage = () => {
       </Link>
     );
   });
+
+  if (!data.length || !filteredProducts.length) {
+    return <Loading />;
+  }
 
   return (
     <>
