@@ -6,13 +6,16 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../rtk/reducers/UserReducer";
+import { signIn } from "../../services/apiHandler";
+import { ToastContainer, toast } from "react-toastify";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const redirectPath = location.state?.path || "/";
   const [invalidUser, setInvalidUser] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // New state to control password visibility
+  const [showPassword, setShowPassword] = useState(false);
+  const [spinner, setSpinner] = useState(false);
 
   const {
     register,
@@ -20,28 +23,40 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    // Reset error states
-    setInvalidUser(false);
+  const onSubmit = async (data) => {
+    try {
+      setSpinner(true);
+      const res = await signIn(data);
+      if (res.status === 200) {
+        dispatch(setUser(res.data.data));
+        navigate("/");
+        setSpinner(false);
+      }
+    } catch (e) {
+      toast.error(e.response.data.message);
+      setSpinner(false);
+    }
+    // // Reset error states
+    // setInvalidUser(false);
 
-    axios
-      .get(
-        `https://amzone-colne.onrender.com/users?email=${data.email}&password=${data.password}`
-      )
-      .then((response) => {
-        if (response.data.length === 1) {
-          // Successfully authenticated
-          console.log("Login successful");
-          dispatch(setUser(response.data[0]));
-          navigate(redirectPath, { replace: true });
-        } else {
-          // User doesn't exist
-          setInvalidUser(true);
-        }
-      })
-      .catch((error) => {
-        console.error("Error during login:", error);
-      });
+    // axios
+    //   .get(
+    //     `https://amzone-colne.onrender.com/users?email=${data.email}&password=${data.password}`
+    //   )
+    //   .then((response) => {
+    //     if (response.data.length === 1) {
+    //       // Successfully authenticated
+    //       console.log("Login successful");
+    //       dispatch(setUser(response.data[0]));
+    //       navigate(redirectPath, { replace: true });
+    //     } else {
+    //       // User doesn't exist
+    //       setInvalidUser(true);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error during login:", error);
+    //   });
   };
 
   const validatePasswordLength = (value) => {
@@ -50,21 +65,19 @@ const Login = () => {
 
   return (
     <div className="flex flex-col justify-center items-center pt-4 ">
+      <ToastContainer />
       <Link to="/">
         <img src={logo} alt="Your Logo" className="mx-auto w-32 mb-4" />
       </Link>
       <div className="max-w-md w-11/12 shadow-xl p-2  rounded-lg border bg-white border-gray-300 flex flex-col justify-center">
-        <h2 className="text-2xl text-center font-bold mb-4">Create Account</h2>
+        <h2 className="text-2xl text-center font-bold mb-4">Sign in</h2>
         {invalidUser && (
           <p className="text-red-500 text-xl mx-auto mt-1">
             Invalid email or password.
           </p>
         )}
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className=" rounded px-8 pt-6 pb-8 mb-4"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className=" rounded px-8 pt-6 ">
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
             <input
@@ -121,7 +134,13 @@ const Login = () => {
           >
             Sign In
           </button>
+          <div
+            className={`border-4 my-1 border-solid mx-auto  ${
+              spinner ? "opacity-1" : "opacity-0"
+            } border-gray-400 border-t-main rounded-full w-8 h-8 animate-spin`}
+          ></div>
         </form>
+
         <div className="flex flex-col justify-center w-full">
           <p className="mx-auto mb-2">New to Amazon?</p>
           <Link
