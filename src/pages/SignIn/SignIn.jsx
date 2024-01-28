@@ -3,7 +3,6 @@ import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import logo from "../../images/login-logo.png";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../rtk/reducers/UserReducer";
 import { signIn } from "../../services/apiHandler";
@@ -36,27 +35,6 @@ const Login = () => {
       toast.error(e.response.data.message);
       setSpinner(false);
     }
-    // // Reset error states
-    // setInvalidUser(false);
-
-    // axios
-    //   .get(
-    //     `https://amzone-colne.onrender.com/users?email=${data.email}&password=${data.password}`
-    //   )
-    //   .then((response) => {
-    //     if (response.data.length === 1) {
-    //       // Successfully authenticated
-    //       console.log("Login successful");
-    //       dispatch(setUser(response.data[0]));
-    //       navigate(redirectPath, { replace: true });
-    //     } else {
-    //       // User doesn't exist
-    //       setInvalidUser(true);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error during login:", error);
-    //   });
   };
 
   const validatePasswordLength = (value) => {
