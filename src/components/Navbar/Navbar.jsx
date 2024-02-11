@@ -58,29 +58,30 @@ const Navbar = () => {
   }, [show]);
   return (
     <>
-      <nav className="z-50 fixed px-2   w-full bg-[#131921] pt-1 sm:py-2  flex flex-col items-center  sm:flex-row">
+      <nav className="z-50 fixed px-2   w-full bg-second pt-1 sm:py-2  flex flex-col items-center  sm:flex-row">
         <div className="w-full md:w-4/5  flex justify-around items-center">
           <div className="w-1/4 flex justify-center">
             <Link to="/">
-              <img src={logo} className="w-full" />
+              {/* <img src={logo} className="w-full" /> */}
+              <h1 className="text-3xl text-white font-bold">E-Shop</h1>
             </Link>
           </div>
           <div className=" flex w-full mx-2 h-9 align-items-center relative">
             <button
               className={`flex items-center p-2 bg-[#f3f3f3] relative left-0 sm:border-[1px] sm:border-e-gray-400 sm:border-solid ${
-                inputFocused ? "outline-main outline outline-2 " : ""
+                inputFocused ? "outline-none focus:outline-none" : ""
               }`}
               onClick={() => setShowUl(!showUl)}
             >
               All
-              <GoTriangleDown className="ml-2" />
+              <GoTriangleDown className="ml-2 " />
             </button>
             {showUl && (
-              <div className="absolute z-50 flex flex-col items-start top-9 p-2 w-64 bg-white border border-solid border-gray-300">
+              <div className="absolute z-50 flex flex-col items-start top-9 p-2 w-64 bg-second text-white border border-solid rounded-b-md border-white">
                 {categories.map((cat, i) => (
                   <button
                     key={i}
-                    className="hover:bg-main w-full flex justify-start p-2 rounded-md duration-300 hover:text-black font-bold"
+                    className=" w-full flex justify-start p-2 rounded-md duration-300 hover:text-second hover:bg-white font-bold"
                   >
                     {cat}
                   </button>
@@ -91,20 +92,20 @@ const Navbar = () => {
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
               type="text"
-              className="w-full focus:outline-main outline outline-2"
+              className="w-full focus:outline-none outline-none"
             />
             <BiSearch
-              className={`bg-main w-11 h-full rounded-r-sm ${
-                inputFocused ? "outline-main outline outline-2 " : ""
+              className={`bg-white w-11 h-full rounded-r-sm text-second ${
+                inputFocused ? "outline-none border-none" : ""
               }`}
             />
           </div>
         </div>
-        <div className="menu-container w-full  bottom-0 z-50 sm:relative bg-[#131921] left-0 sm:w-2/5 py-2  flex justify-around text-white">
+        <div className="menu-container w-full  bottom-0 z-50 sm:relative bg-second left-0 sm:w-2/5 py-2  flex justify-around text-white">
           {user?.user && (
             <button
               onClick={() => setShow(!show)}
-              className="hover:bg-main px-3 rounded-md w-fit hover:text-black font-bold text-md duration-300  flex justify-center items-center"
+              className="hover:bg-header px-3 rounded-md w-fit hover:text-white font-bold text-md duration-300  flex justify-center items-center"
             >
               {user?.user}
             </button>
@@ -113,16 +114,18 @@ const Navbar = () => {
             <ul className="absolute left-0 w-1/2 bottom-[58px] sm:top-[118px] xl:top-[122px] sm:right-[101px]  flex justify-center flex-col">
               <Link
                 to={`${
-                  user?.role === "admin" ? "/admindashboard" : "/profile"
+                  user?.role === "Admin"
+                    ? "/admindashboard"
+                    : "/profile?status=Sales"
                 }`}
-                className="bg-main py-3 duration-300 hover:bg-[#131921] hover:text-white flex justify-center cursor-pointer text-black text-xl"
+                className="bg-main py-3 duration-300 hover:bg-second hover:text-white font-bold flex justify-center cursor-pointer text-white text-xl"
                 href="#"
               >
                 Profile
               </Link>
               <button
                 onClick={() => handleLogout()}
-                className="bg-main py-3 duration-300 hover:bg-[#131921] hover:text-white flex justify-center cursor-pointer text-black text-xl"
+                className="bg-main py-3 duration-300 hover:bg-second hover:text-white font-bold  flex justify-center cursor-pointer text-white text-xl"
               >
                 Sign Out
               </button>
@@ -138,7 +141,7 @@ const Navbar = () => {
           )}
           <Link
             to="/bascket"
-            className="hover:bg-main mb-1 p-1 w-28 rounded-md hover:text-black font-bold text-lg duration-300  flex justify-center items-center"
+            className="hover:bg-header mb-1 p-1 w-28 rounded-md hover:text-white font-bold text-lg duration-300  flex justify-center items-center"
           >
             <BsCart3 className="text-3xl" />
             <h2>{cartItems.length > 0 && cartItems.length} </h2>

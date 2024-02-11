@@ -25,7 +25,6 @@ const isAdmin = async (req, res, next) => {
 
   // Check if token exists
   if (token) {
-    console.log(token);
     jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, decodedToken) => {
       if (err) {
         console.log(err.message);
@@ -34,7 +33,7 @@ const isAdmin = async (req, res, next) => {
         connectDB();
         const user = await User.findById(decodedToken.userId);
 
-        if (user && user.role === "admin") {
+        if (user && user.role === "Admin") {
           next();
         } else {
           res.redirect("/signin"); // Redirect to login page or handle as needed
