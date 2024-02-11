@@ -35,7 +35,6 @@ const CategoryPage = () => {
     );
     setFilteredProducts(filteredProducts.length > 0 ? filteredProducts : data);
   }, [selectedBrands, priceRange, data]);
-
   useEffect(() => {
     axios
       .get(
@@ -104,9 +103,9 @@ const CategoryPage = () => {
     );
   });
 
-  if (!data.length || !filteredProducts.length) {
-    return <Loading />;
-  }
+  // if (!data.length || !filteredProducts.length) {
+  //   return <Loading />;
+  // }
 
   return (
     <>
