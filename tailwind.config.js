@@ -4,12 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        main: "#2c3e50",
-        second: "#157075",
-        secondhover: "#0F4D54",
-        sidebar: "#2c3e50",
-        header: "#2c3e50",
-        body: "#333333"
+        main: "#cd9042",
+        second: "#131921",
       },
     },
   },

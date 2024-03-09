@@ -38,7 +38,7 @@ const Sidebar = () => {
           onClick={() => setOpen(!open)}
           className={`mt-20 ${
             open && "ml-48"
-          } md:hidden fixed bg-second text-black duration-300 p-2 top-20`}
+          } md:hidden absolute bg-main text-black duration-300 p-2 top-20`}
         >
           <FiSettings className="text-4xl animate-spin" />
         </button>
@@ -47,13 +47,13 @@ const Sidebar = () => {
             open ? "sidebar " : ""
           } ${
             open && "w-48 px-2"
-          } mt-[74px] md:hover:w-48 fixed md:px-2 pt-10 bg-second overflow-hidden flex flex-col justify-start sm:justify-start sm:flex-col duration-300`}
+          } mt-[74px] md:hover:w-48 fixed md:px-2 pt-10 bg-main overflow-hidden flex flex-col justify-start sm:justify-start sm:flex-col duration-300`}
         >
           <Link
             to="/admindashboard"
             onClick={() => handleChoose("undefined")}
-            className={`flex hover:bg-white hover:text-second text-white  h-14 rounded-md my-1 duration-300  p-3 items-center text-2xl  ${
-              selectedPage === "undefined" && "bg-white text-second"
+            className={`flex hover:bg-second hover:text-white h-14 rounded-md my-1 duration-300  p-3 items-center text-2xl  ${
+              selectedPage === "undefined" && "bg-second text-white"
             }`}
           >
             <span className="">
@@ -64,8 +64,8 @@ const Sidebar = () => {
           <Link
             to="/admindashboard/users"
             onClick={() => handleChoose("users")}
-            className={`flex hover:bg-white hover:text-second text-white h-14 rounded-md my-1 duration-300  p-3 items-center text-2xl  ${
-              selectedPage === "users" && "bg-white text-second"
+            className={`flex hover:bg-second hover:text-white h-14 rounded-md my-1 duration-300  p-3 items-center text-2xl  ${
+              selectedPage === "users" && "bg-second text-white"
             }`}
           >
             <span>
@@ -76,8 +76,8 @@ const Sidebar = () => {
           <Link
             to="/admindashboard/categories"
             onClick={() => handleChoose("categories")}
-            className={`flex hover:bg-white hover:text-second text-white h-14 rounded-md my-1 duration-300  p-3 items-center text-2xl  ${
-              selectedPage === "categories" && "bg-white text-second"
+            className={`flex hover:bg-second hover:text-white h-14 rounded-md my-1 duration-300  p-3 items-center text-2xl  ${
+              selectedPage === "categories" && "bg-second text-white"
             }`}
           >
             <span>
@@ -88,8 +88,8 @@ const Sidebar = () => {
           <Link
             to="/admindashboard/products"
             onClick={() => handleChoose("products")}
-            className={`flex hover:bg-white hover:text-second text-white h-14 justify-start rounded-md my-1 duration-300  p-3 items-center text-2xl  ${
-              selectedPage === "products" && "bg-second text-second"
+            className={`flex hover:bg-second hover:text-white h-14 justify-start rounded-md my-1 duration-300  p-3 items-center text-2xl  ${
+              selectedPage === "products" && "bg-second text-white"
             }`}
           >
             <span>

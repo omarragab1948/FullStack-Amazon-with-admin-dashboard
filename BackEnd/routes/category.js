@@ -9,12 +9,12 @@ router.post(
   isAdmin,
   categoryController.addCategory
 );
-router.get("/getcategories", requireAuth, categoryController.getAllCategories);
-router.delete(
-  "/deletecategory/:id",
+router.get(
+  "/getcategories",
   requireAuth,
   isAdmin,
-  categoryController.deleteCategory
+  categoryController.getAllCategories
 );
+// router.post("/signout", authController.signOut);
 
 module.exports = router;

@@ -21,14 +21,9 @@ app.use(
 app.use(bodyParser.json());
 const signupRouter = require("./routes/auth");
 const categoryRouter = require("./routes/category");
-const userRouter = require("./routes/user");
-const productRouter = require("./routes/product");
 
 app.use("/", signupRouter);
 app.use("/", categoryRouter);
-app.use("/", userRouter);
-app.use("/", productRouter);
-
 app.use((error, req, res, next) => {
   res
     .status(error.status)

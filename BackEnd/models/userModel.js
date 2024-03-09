@@ -24,23 +24,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     required: true,
-    default: "User",
-  },
-  totalPurchases: {
-    type: Number,
-    default: 0,
-  },
-  totalPurchasesProducts: {
-    type: Number,
-    default: 0,
-  },
-  totalSales: {
-    type: Number,
-    default: 0,
-  },
-  totalSalesProducts: {
-    type: Number,
-    default: 0,
+    default: "user",
   },
 });
 

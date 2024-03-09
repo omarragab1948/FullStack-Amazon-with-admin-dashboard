@@ -14,8 +14,6 @@ import Users from "./pages/Users/Users";
 import Products from "./pages/Products/Products";
 import Categoies from "./pages/Categories/Categoies";
 import DashboardOutlet from "./components/DashboardOutlet/DashboardOutlet";
-import UserInfo from "./pages/AdminDashboard/UserInfo/UserInfo";
-import SellProduct from "./pages/Profile/SellProduct/Sellproduct";
 
 const App = () => {
   return (
@@ -30,17 +28,13 @@ const App = () => {
         <Route path="/bascket/:category/:id" element={<ProductDetails />} />
         <Route path="/profile/:category/:id" element={<ProductDetails />} />
         <Route
-          path="/profile/*"
+          path="/profile"
           element={
             <RequireAuth>
-              <Routes>
-                <Route path="/" element={<Profile />} />
-                <Route path="/sell-product" element={<SellProduct />} />
-              </Routes>
+              <Profile />
             </RequireAuth>
           }
         />
-
         <Route
           path="/admindashboard"
           element={
@@ -50,12 +44,8 @@ const App = () => {
           }
         >
           <Route path="/admindashboard" element={<AdminDashboard />} />
-          <Route path="/admindashboard/users" element={<Users />} />
-          <Route
-            path="/admindashboard/users/userinfo/:id"
-            element={<UserInfo />}
-          />
 
+          <Route path="/admindashboard/users" element={<Users />} />
           <Route path="/admindashboard/products" element={<Products />} />
           <Route path="/admindashboard/categories" element={<Categoies />} />
         </Route>

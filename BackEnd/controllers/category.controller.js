@@ -30,11 +30,10 @@ const addCategory = asyncWrapper(async (req, res) => {
 
 const getAllCategories = asyncWrapper(async (req, res, next) => {
   const categories = await Category.find();
-
   if (categories.length > 0) {
     res.status(200).json({
       status: "success",
-      data: categories.reverse(),
+      data: categories,
     });
   } else {
     res.status(200).json({
@@ -43,24 +42,7 @@ const getAllCategories = asyncWrapper(async (req, res, next) => {
     });
   }
 });
-const deleteCategory = asyncWrapper(async (req, res) => {
-  const id = req.params.id;
-  if (!id) {
-    return res.status(400).json({ message: "Category id is required." });
-  }
-
-  try {
-    connectDB();
-    await Category.findByIdAndDelete(id);
-    res.status(200).json({ message: "Category deleted successfully." });
-  } catch (error) {
-    console.error("Error adding category:", error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
-
 module.exports = {
   addCategory,
   getAllCategories,
-  deleteCategory,
 };

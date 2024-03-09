@@ -29,7 +29,7 @@ const CategoryPopup = ({ show, handleShow, handleGetCategories }) => {
     setSpinner(true);
 
     const image = await imageUploader(imageFile, "category");
-
+    console.log(user?.token);
     if (image) {
       const cat = {
         categoryName,
@@ -37,10 +37,9 @@ const CategoryPopup = ({ show, handleShow, handleGetCategories }) => {
       };
       try {
         const res = await addCategory(cat, user?.token);
-        if (res.status === 201) {
-          handleGetCategories();
-          setSpinner(false);
-        }
+        console.log(res);
+        handleGetCategories();
+        setSpinner(false);
       } catch (err) {
         console.log(err);
         setSpinner(false);
@@ -60,8 +59,8 @@ const CategoryPopup = ({ show, handleShow, handleGetCategories }) => {
   return (
     <>
       {show && (
-        <div className="menu-container mt-16 sm:mt-8 fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-          <div className=" bg-main text-white p-6 rounded-lg shadow-md w-96 relative">
+        <div className="menu-container mt-8 fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
+          <div className=" bg-white p-6 rounded-lg shadow-md w-96 relative">
             <button
               onClick={handleClose}
               className="bg-red-600 hover:bg-red-500 duration-300 absolute top-2 right-3 text-white px-4 py-2 rounded-md"
@@ -84,7 +83,7 @@ const CategoryPopup = ({ show, handleShow, handleGetCategories }) => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="mb-4 "
+              className="mb-4"
             />
 
             {/* Category Name Input */}
@@ -93,7 +92,7 @@ const CategoryPopup = ({ show, handleShow, handleGetCategories }) => {
               placeholder="Category Name"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
-              className="w-full border p-2 mb-4 rounded-md bg-second text-white focus:border-none focus:outline-none"
+              className="w-full border p-2 mb-4 rounded-md"
             />
 
             {/* Submit and Close Buttons */}
@@ -107,10 +106,7 @@ const CategoryPopup = ({ show, handleShow, handleGetCategories }) => {
               </div>
               <button
                 onClick={handleSubmit}
-                disabled={!imageFile || !categoryName}
-                className={` text-white px-4 py-2 ml-3 rounded-md ${
-                  (!imageFile || !categoryName) ? "bg-gray-500" : "bg-second"
-                }`}
+                className="bg-blue-500 text-white px-4 py-2 ml-3 rounded-md"
               >
                 Submit
               </button>
