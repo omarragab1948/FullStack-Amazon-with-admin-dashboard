@@ -12,7 +12,7 @@ import headphone from "../../images/Headphone.jpg";
 import securityCamera from "../../images/security camera.jpg";
 import Kitchen from "../../images/kitchen.jpg";
 import smartWatch from "../../images/smart watch.jpg";
-import laptops from "../../images/laptop.jpg";
+import laptops from "../../images/Laptop.jpg";
 import health from "../../images/health.jpg";
 import pets from "../../images/pets.jpg";
 import mobiles from "../../images/mobiles.jpg";
