@@ -21,11 +21,6 @@ const userSchema = new mongoose.Schema({
     required: [true, "Password is required"],
     minlength: [8, "Password must be at least 8 characters"],
   },
-  role: {
-    type: String,
-    required: true,
-    default: "user",
-  },
 });
 
 const User = mongoose.model("User", userSchema);

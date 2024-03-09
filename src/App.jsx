@@ -8,12 +8,6 @@ import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import Bascket from "./pages/Basket/Bascket";
 import Profile from "./pages/Profile/Profile";
 import RequireAuth from "./components/RequireAuth";
-import Adminauth from "./components/Adminauth";
-import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
-import Users from "./pages/Users/Users";
-import Products from "./pages/Products/Products";
-import Categoies from "./pages/Categories/Categoies";
-import DashboardOutlet from "./components/DashboardOutlet/DashboardOutlet";
 
 const App = () => {
   return (
@@ -35,20 +29,6 @@ const App = () => {
             </RequireAuth>
           }
         />
-        <Route
-          path="/admindashboard"
-          element={
-            <Adminauth>
-              <DashboardOutlet />
-            </Adminauth>
-          }
-        >
-          <Route path="/admindashboard" element={<AdminDashboard />} />
-
-          <Route path="/admindashboard/users" element={<Users />} />
-          <Route path="/admindashboard/products" element={<Products />} />
-          <Route path="/admindashboard/categories" element={<Categoies />} />
-        </Route>
       </Routes>
     </Router>
   );

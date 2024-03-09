@@ -2,8 +2,6 @@ const connectDB = require("../DB/connectDB");
 const asyncWrapper = require("../middlewares/asyncWrapper");
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
-const generateToken = require("../utils/generateToken");
-
 const signUp = asyncWrapper(async (req, res, next) => {
   const { userName, email, password } = req.body;
 
@@ -63,15 +61,9 @@ const signIn = asyncWrapper(async (req, res, next) => {
       const user = await User.findOne({ email: email });
       if (user) {
         const verifiedPassword = await bcrypt.compare(password, user.password);
+        console.log(verifiedPassword);
         if (verifiedPassword) {
-          const token = generateToken(user?._id.toString(), user?.role);
-          res.cookie("token", token, {
-            httpOnly: true,
-          });
-          res.status(200).json({
-            status: "success",
-            data: { user: user.userName, role: user.role, token },
-          });
+          res.status(200).json({ status: "success", data: user.userName });
         } else {
           const error = new Error();
           error.status = 400;
@@ -96,14 +88,8 @@ const signIn = asyncWrapper(async (req, res, next) => {
     next(error);
   }
 });
-const signOut = asyncWrapper(async (req, res, next) => {
-  res.clearCookie("token");
-  res.status(200).json({
-    message: "signed out",
-  });
-});
+
 module.exports = {
   signUp,
   signIn,
-  signOut,
 };
